@@ -113,3 +113,6 @@ venv/
 # Custom directory exclusions
 Data Preprocess/
 archive/
+
+
+wandb/

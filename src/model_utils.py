@@ -6,6 +6,7 @@ from src.utils import print_master
 from src.vlm_backbone.llava_next import LlavaNextForConditionalGeneration
 from src.vlm_backbone.phi3_v.modeling_phi3_v import Phi3VForCausalLM
 from src.vlm_backbone.qwen2_5_vl import Qwen2_5_VLForConditionalGeneration
+# from transformers import Qwen2_5_VLForConditionalGeneration
 from src.vlm_backbone.qwen2_vl import Qwen2VLForConditionalGeneration
 
 logger = logging.getLogger(__name__)
@@ -72,10 +73,12 @@ def load_processor(model_args):
             min_pixels=256 * 28 * 28, max_pixels=1280 * 28 * 28
         )
     elif model_args.model_backbone == QWEN2_5_VL:
-        from src.vlm_backbone.qwen2_5_vl.processing_qwen2_5_vl import Qwen2_5_VLProcessor
-        from src.vlm_backbone.qwen2_5_vl.image_processing_qwen2_5_vl import Qwen2_5_VLImageProcessor
-        from src.vlm_backbone.qwen2_vl.tokenization_qwen2_fast import Qwen2TokenizerFast
-        image_processor = Qwen2_5_VLImageProcessor.from_pretrained(model_name)
+        # from src.vlm_backbone.qwen2_5_vl.processing_qwen2_5_vl import Qwen2_5_VLProcessor
+        # from src.vlm_backbone.qwen2_5_vl.image_processing_qwen2_5_vl import Qwen2_5_VLImageProcessor
+        # from src.vlm_backbone.qwen2_vl.tokenization_qwen2_fast import Qwen2TokenizerFast
+        # image_processor = Qwen2_5_VLImageProcessor.from_pretrained(model_name)
+        from transformers import Qwen2VLImageProcessor, Qwen2_5_VLProcessor, Qwen2TokenizerFast
+        image_processor = Qwen2VLImageProcessor.from_pretrained(model_name)
         tokenizer = Qwen2TokenizerFast.from_pretrained(model_name)
         processor = Qwen2_5_VLProcessor.from_pretrained(model_name, image_processor=image_processor, tokenizer=tokenizer)
     else:

@@ -51,8 +51,7 @@ def main():
     train_dataset = TrainTextImageDataset(data_args, model_args)
     collator = TrainTextImageDataCollator(data_args, model_args, processor)
 
-    trainer_cls = GradCacheLateProcessTrainer
-    trainer = trainer_cls(
+    trainer = GradCacheLateProcessTrainer(
         model=model,
         processing_class=processor,
         args=training_args,

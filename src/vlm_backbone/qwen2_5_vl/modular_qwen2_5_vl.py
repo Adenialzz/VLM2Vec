@@ -887,7 +887,8 @@ class Qwen2_5_VLProcessor(Qwen2VLProcessor):
             in a chat into a tokenizable string.
     """
 
-    image_processor_class = "Qwen2_5_VLImageProcessor"
+    # image_processor_class = "Qwen2_5_VLImageProcessor"
+    image_processor_class = "Qwen2VLImageProcessor"
 
     def __call__(
         self,

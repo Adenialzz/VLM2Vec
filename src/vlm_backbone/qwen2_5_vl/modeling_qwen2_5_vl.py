@@ -163,10 +163,10 @@ class Qwen2_5_VLPatchMerger(nn.Module):
 
 def apply_rotary_pos_emb_flashatt(tensor: torch.Tensor, freqs: torch.Tensor) -> torch.Tensor:
     # tensor_ = tensor.float()  # why this? it will be cast to float32 and cause AssertionError: Input and cos/sin must have the same dtype, got torch.float32 and torch.bfloat16
-    tensor_ = tensor
-    cos = freqs.cos()
-    sin = freqs.sin()
-    output = apply_rotary_emb(tensor_, cos, sin).type_as(tensor)
+    cos = freqs.cos().type_as(tensor)
+    sin = freqs.sin().type_as(tensor)
+    # print(tensor_.dtype, cos.dtype, sin.dtype)
+    output = apply_rotary_emb(tensor, cos, sin).type_as(tensor)
     return output
 
 
